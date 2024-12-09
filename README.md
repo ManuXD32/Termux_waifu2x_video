@@ -3,7 +3,7 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
 
 ## Installation:
   Clone the repo and give execution permissions to the installer.sh script
-    ```sh
+    ```
     chmod +x installer.sh
     ```
 
@@ -12,7 +12,7 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
 
   If you want to be able to also upscale videos using waifu2x, you can use the python script provided in this repo, it uses an implementation of chunks to be able to process large videos, as having a folder with 200000 frames will surely make it unusable.
   The syntax to use the script is this:   
-      ```sh
+      ```
       python video_upscaler.py input.mp4 output.mp4 scale_factor chunk_time [model]
       ```
         The scale factor can be 2 or 4, if you choose 4, the frames will be upscaled twice.
