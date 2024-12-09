@@ -24,4 +24,4 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
 
 ## CREDITS:
 tanyiok1234 for the binaries https://github.com/tanyiok1234/waifu2x_srmd-ncnn-vulkan-termux-binary
-k4yt3x because I took the idea of your awesome project https://github.com/k4yt3x/video2x
+k4yt3x because I took the idea from your awesome project https://github.com/k4yt3x/video2x
