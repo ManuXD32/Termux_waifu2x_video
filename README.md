@@ -1,7 +1,7 @@
-# Termux_waifu2x_video
+## Termux_waifu2x_video
 This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x binaries.
 
-#Installation:
+## Installation:
   Clone the repo and give execution permissions to the installer.sh script
     chmod +x installer.sh
 
@@ -15,13 +15,13 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
         For the chunk time I sugest using a maximum of 60 seconds, the script will use ffmpeg to split the original video in chunks of 60 seconds each.
         The model is optional, leaving it blanck will default to models-cunet, if you want to specify a different model you will need to write its name, the script will know where to look for it.
         
-#How it works?
+## How it works?
   The python script will split the original video into several chunks depending on the time set by the user, it will then extract the frames of one chunk at a time, upscale it, rebuild an upscaled chunk, remove the chunk folder with the original frames and go to the next chunk until everything has been processed. Once it finishes, it will merge all of the chunks and add the original audio and subs track.
 
 
-#WARNING!!
+## WARNING!!
   This is a very intense process, your device might have visual glitches while upscaling because it's using all of its GPU resources. Trying to upscale very large videos will take several hours, even more if you are upscaling by 4 and the device can get very hot.
 
-#CREDITS:
+## CREDITS:
 tanyiok1234 for the binaries https://github.com/tanyiok1234/waifu2x_srmd-ncnn-vulkan-termux-binary
 k4yt3x because I took the idea of your awesome project https://github.com/k4yt3x/video2x
