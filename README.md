@@ -3,14 +3,18 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
 
 ## Installation:
   Clone the repo and give execution permissions to the installer.sh script
+    ```sh
     chmod +x installer.sh
+    ```
 
   The installer will clone tanyiok1234 repo with the termux binaries for using the waifu2x tool, it will also install ffmpeg, python3, the vulkan headers and git (just in case)
   Then it will move the models and put the binary into the usr/bin folder and rename it to upscaler2x 
 
   If you want to be able to also upscale videos using waifu2x, you can use the python script provided in this repo, it uses an implementation of chunks to be able to process large videos, as having a folder with 200000 frames will surely make it unusable.
-  The syntax to use the script is this: 
+  The syntax to use the script is this:   
+      ```sh
       python video_upscaler.py input.mp4 output.mp4 scale_factor chunk_time [model]
+      ```
         The scale factor can be 2 or 4, if you choose 4, the frames will be upscaled twice.
         For the chunk time I sugest using a maximum of 60 seconds, the script will use ffmpeg to split the original video in chunks of 60 seconds each.
         The model is optional, leaving it blanck will default to models-cunet, if you want to specify a different model you will need to write its name, the script will know where to look for it.
