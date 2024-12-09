@@ -128,7 +128,7 @@ def process_video(input_video, output_video, scale_factor, chunk_time, model):
 def print_help():
     """Prints help information about the script."""
     help_text = """
-    Usage: python script.py input.mp4 output.mp4 scale_factor chunk_time [model]
+    Usage: python video_upscaler.py input.mp4 output.mp4 scale_factor chunk_time [model]
     
     Arguments:
         input.mp4       Input video file
@@ -142,8 +142,8 @@ def print_help():
                         - models-cunet
 
     Example:
-        python script.py input.mp4 output.mp4 2 60 models-cunet
-        python script.py input.mp4 output.mp4 4 120
+        python video_upscaler.py input.mp4 output.mp4 2 60 models-cunet
+        python video_upscaler.py input.mp4 output.mp4 4 120
     """
     print(help_text)
 
