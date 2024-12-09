@@ -15,7 +15,7 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
         For the chunk time I sugest using a maximum of 60 seconds, the script will use ffmpeg to split the original video in chunks of 60 seconds each.
         The model is optional, leaving it blanck will default to models-cunet, if you want to specify a different model you will need to write its name, the script will know where to look for it.
         
-## How it works?
+## How does it work?
   The python script will split the original video into several chunks depending on the time set by the user, it will then extract the frames of one chunk at a time, upscale it, rebuild an upscaled chunk, remove the chunk folder with the original frames and go to the next chunk until everything has been processed. Once it finishes, it will merge all of the chunks and add the original audio and subs track.
 
 
