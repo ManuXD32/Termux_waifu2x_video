@@ -12,7 +12,7 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
      ```
   3. Execute the help command of the python script:
      ```
-     python video_upscaler.py
+     python video_upscaler.py --help
      ```
 
   The installer will clone tanyiok1234 repo with the termux binaries for using the waifu2x tool, it will also install ffmpeg, python3, the vulkan headers and git (just in case)
