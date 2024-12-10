@@ -5,34 +5,30 @@ from pathlib import Path
 import shutil
 
 def run_command(command):
-    """Runs a shell command."""
     print(f"Running: {command}")
     subprocess.run(command, shell=True, check=True)
 
 def extract_frames(video_path, output_folder):
-    """Extracts frames from a video."""
     os.makedirs(output_folder, exist_ok=True)
     run_command(f"ffmpeg -i {video_path} -qscale:v 2 {output_folder}/frame_%04d.png")
 
 def rebuild_video(frames_folder, output_video, fps):
-    """Rebuilds a video from frames."""
     run_command(f"ffmpeg -framerate {fps} -i {frames_folder}/frame_%04d.png -c:v libx264 -pix_fmt yuv420p {output_video}")
 
 def upscale_frame(input_frame, scale_factor, model):
-    """Upscales a single frame with the specified model."""
+    cpu_flag = "-g -1" if use_cpu else ""
     if scale_factor == 2:
-        upscale_cmd = f"upscaler2x -i {input_frame} -o {input_frame.replace('frames', 'upscaled_frames')} -v -n -1 -s 2 -m ~/.upscaler_models/{model}"
+        upscale_cmd = f"upscaler2x -i {input_frame} -o {input_frame.replace('frames', 'upscaled_frames')} -v -n -1 -s 2 -m ~/.upscaler_models/{model} {cpu_flag}"
         run_command(upscale_cmd)
     elif scale_factor == 4:
         first_upscaled = input_frame.replace('frames', 'upscaled_frames')
-        upscale_cmd = f"upscaler2x -i {input_frame} -o {first_upscaled} -v -n -1 -s 2 -m ~/.upscaler_models/{model}"
+        upscale_cmd = f"upscaler2x -i {input_frame} -o {first_upscaled} -v -n -1 -s 2 -m ~/.upscaler_models/{model} {cpu_flag}"
         run_command(upscale_cmd)
         second_upscaled = first_upscaled.replace('upscaled_frames', 'upscaled_frames_2x')
-        upscale_cmd = f"upscaler2x -i {first_upscaled} -o {second_upscaled} -v -n -1 -s 2 -m ~/.upscaler_models/{model}"
+        upscale_cmd = f"upscaler2x -i {first_upscaled} -o {second_upscaled} -v -n -1 -s 2 -m ~/.upscaler_models/{model} {cpu_flag}"
         run_command(upscale_cmd)
 
 def upscale_chunk(chunk_folder, scale_factor, model):
-    """Upscales all frames in a chunk with the specified model."""
     frames_folder = os.path.join(chunk_folder, "frames")
     upscaled_folder = os.path.join(chunk_folder, "upscaled_frames")
     os.makedirs(upscaled_folder, exist_ok=True)
@@ -51,7 +47,6 @@ def upscale_chunk(chunk_folder, scale_factor, model):
     return final_upscaled_folder
 
 def split_video(input_video, chunk_time):
-    """Splits the video into chunks."""
     output_chunks = []
     duration_command = f"ffmpeg -i {input_video} 2>&1 | grep Duration"
     result = subprocess.run(duration_command, shell=True, capture_output=True, text=True)
@@ -73,7 +68,6 @@ def split_video(input_video, chunk_time):
     return output_chunks
 
 def merge_upscaled_chunks(chunk_files, output_file, original_video):
-    """Merges upscaled chunks into a single video, including audio and subtitles."""
     list_file = "chunk_list.txt"
     with open(list_file, "w") as f:
         for chunk in chunk_files:
@@ -86,7 +80,6 @@ def merge_upscaled_chunks(chunk_files, output_file, original_video):
     os.remove(list_file)
 
 def process_video(input_video, output_video, scale_factor, chunk_time, model):
-    """Main function to process the video."""
     temp_folder = "temp"
     os.makedirs(temp_folder, exist_ok=True)
 
@@ -126,7 +119,6 @@ def process_video(input_video, output_video, scale_factor, chunk_time, model):
     print(f"Upscaled video saved as {output_video}")
 
 def print_help():
-    """Prints help information about the script."""
     help_text = """
     Usage: python video_upscaler.py input.mp4 output.mp4 scale_factor chunk_time [model]
     
@@ -140,6 +132,7 @@ def print_help():
                         - models-upconv_7_anime_style_art_rgb
                         - models-upconv_7_photo
                         - models-cunet
+        cpu             (Optional) Use CPU for upscaling instead of GPU. (slow)
 
     Example:
         python video_upscaler.py input.mp4 output.mp4 2 60 models-cunet
@@ -161,7 +154,8 @@ if __name__ == "__main__":
     output_video = sys.argv[2]
     scale_factor = int(sys.argv[3])
     chunk_time = int(sys.argv[4])
-    model = sys.argv[5] if len(sys.argv) == 6 else "models-cunet"
+    model = sys.argv[5] if len(sys.argv) >= 6 and sys.argv[5] != "cpu" else "models-cunet"
+    use_cpu = "cpu" in sys.argv
 
     if model not in ["models-upconv_7_anime_style_art_rgb", "models-upconv_7_photo", "models-cunet"]:
         print(f"Invalid model '{model}'. Valid options are: models-upconv_7_anime_style_art_rgb, models-upconv_7_photo, models-cunet")
