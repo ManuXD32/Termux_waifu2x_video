@@ -21,12 +21,16 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
   If you want to be able to also upscale videos using waifu2x, you can use the python script provided in this repo, it uses an implementation of chunks to be able to process large videos, as having a folder with 200000 frames will surely make it unusable.
   The syntax to use the script is this: 
   
-      python video_upscaler.py input.mp4 output.mp4 scale_factor chunk_time [model] [cpu]
+      python video_upscaler.py input.mp4 output.mp4 scale_factor chunk_time model [cpu]
 
         The scale factor can be 2 or 4, if you choose 4, the frames will be upscaled twice.
         For the chunk time I sugest using a maximum of 60 seconds, the script will use ffmpeg to split the original video in chunks of 60 seconds each.
         The model is optional, leaving it blanck will default to models-cunet, if you want to specify a different model you will need to write its name, the script will know where to look for it.
         Added an option to use cpu instead of gpu, the you just need to specify cpu at the end of the python call, if no cpu argument specified, the script will default to gpu. Using cpu is painfully slow, only advised if using gpu leads to glitches in the output or blank images.
+
+      python video_upscaler.py resume
+        As upscaling big videos can be so slow and the process may even stop, I have added this option.
+        It will begin where the last job run on this folder left off, it works by keeping track of the last command job and the last processed chunk and frame.
 
       
 ## How does it work?
