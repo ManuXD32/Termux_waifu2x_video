@@ -1,12 +1,12 @@
 #!/bin/bash
 
+echo "Installing required packages..."
+apt update && apt install vulkan-tools vulkan-headers clang build-essential make cmake python-pip python3 ffmpeg git -y
+
 echo "Cloning waifu2x-ncnn-vulkan repository..."
 git clone https://github.com/nihui/waifu2x-ncnn-vulkan.git
 cd waifu2x-ncnn-vulkan || { echo "Failed to enter directory."; exit 1; }
 git submodule update --init --recursive
-
-echo "Installing required packages..."
-apt update && apt install vulkan-tools vulkan-headers clang build-essential make cmake -y
 
 echo "Cloning Google's Android NDK..."
 git clone https://android.googlesource.com/platform/ndk.git ~/ndk
@@ -28,6 +28,11 @@ rm -f ~/../usr/bin/upscale2x
 
 echo "Copying new binary to bin folder..."
 cp ~/waifu2x-ncnn-vulkan/build/waifu2x-ncnn-vulkan ~/../usr/bin/upscale2x
+
+echo "Copying models"
+rm -rf ~/.upscaler_models/
+mkdir ~/.upscaler_models
+mv ~/waifu2x-ncnn-vulkan/models/* ~/.upscaler_models/
 
 echo "Cleaning up"
 rm -rf ~/ndk ~/waifu2x-ncnn-vulkan
