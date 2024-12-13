@@ -1,0 +1,43 @@
+1. Clone the waifu2x repo for vulkan, enter and get the submodules:
+	git clone https://github.com/nihui/waifu2x-ncnn-vulkan.git
+	cd waifu2x-ncnn-vulkan
+	git submodule update --init --recursive
+
+2. Install the requirements:
+	apt update
+	apt install vulkan-tools vulkan-headers clang build-essential make cmake ninja -y
+
+3. Get google's Android NDK:
+	git clone https://android.googlesource.com/platform/ndk.git ~/ndk
+
+4. Modify the CMakeLists.txt file of libwebp:
+	nano src/libwebp/CMakeLists.txt 
+
+5. Look for this line:
+	if(ANDROID)
+
+6. Add the NDK path right before that line, it should look like this:
+	set(ANDROID_NDK ~/ndk)
+	if(ANDROID)
+
+7. Change the CMakelists.txt of the waifu2x project:
+	nano src/CMakeLists.txt
+
+8. Replace the last line:
+	Original:
+		target_link_libraries(waifu2x-ncnn-vulkan ${WAIFU2X_LINK_LIBRARIES})
+	New:
+		target_link_libraries(waifu2x-ncnn-vulkan PRIVATE ${WAIFU2X_LINK_LIBRARIES} android log)
+
+9. Begin the build:
+	cd ~/waifu2x-ncnn-vulkan
+	mkdir build
+	cd build
+	cmake -DANDROID_ABI=arm64-v8a ../src
+	cmake --build . -j 4
+
+10. Remove the upscale2x binary from your termux bin folder:
+  rm ~/../usr/bin/upscale2x
+
+11. Copy the new binary to the bin folder:
+  cp ~/waifu2x-ncnn-vulkan/build/waifu2x-ncnn-vulkan ~/../usr/bin/upscale2x
