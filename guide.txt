@@ -5,7 +5,7 @@
 
 2. Install the requirements:
 	apt update
-	apt install vulkan-tools vulkan-headers clang build-essential make cmake ninja -y
+	apt install vulkan-tools vulkan-headers clang build-essential make cmake -y
 
 3. Get google's Android NDK:
 	git clone https://android.googlesource.com/platform/ndk.git ~/ndk
