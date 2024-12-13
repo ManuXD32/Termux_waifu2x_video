@@ -34,7 +34,7 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
 
 
 ## Build waifu2x binary on termux:
-Follow the guide written in guide.txt
+Follow the guide written in guide.txt or use the setup_waifu2x.sh script provided on this repo :)
 
 By using the binary compiled by yourself, and if your GPU is compatible with vulkan, you can increase the speed of the upscaling and use the new python script to be able to upscale by higher factors way faster. 
 
