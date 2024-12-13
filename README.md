@@ -9,6 +9,7 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
   2. Execute the installer:
      ```
      ./installer.sh
+     If you want to compile waifu2x, execute chmod +x setup_waifu2x.sh && ./setup_waifu2x.sh after the installer
      ```
   3. Execute the help command of the python script:
      ```
