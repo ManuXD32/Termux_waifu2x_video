@@ -7,6 +7,8 @@ echo "Cloning waifu2x-ncnn-vulkan repository..."
 git clone https://github.com/nihui/waifu2x-ncnn-vulkan.git
 cd waifu2x-ncnn-vulkan || { echo "Failed to enter directory."; exit 1; }
 git submodule update --init --recursive
+cd ..
+mv waifu2x-ncnn-vulkan ~
 
 echo "Cloning Google's Android NDK..."
 git clone https://android.googlesource.com/platform/ndk.git ~/ndk
