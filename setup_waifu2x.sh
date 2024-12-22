@@ -13,6 +13,7 @@ mv waifu2x-ncnn-vulkan ~
 echo "Cloning Google's Android NDK..."
 git clone https://android.googlesource.com/platform/ndk.git ~/ndk
 
+cd ~/waifu2x-ncnn-vulkan
 echo "Modifying libwebp CMakeLists.txt..."
 sed -i '/if(ANDROID)/i set(ANDROID_NDK ~/ndk)' src/libwebp/CMakeLists.txt
 
