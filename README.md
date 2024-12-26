@@ -26,8 +26,8 @@ This repo tries to replicate the work of video2x, it uses tanyiok1234 waifu2x bi
 
         The scale factor can be 2/4/8/16/32 if you compile the waifu2x binary, if you use the precompiled one you can only upscale by 2 or 4, if you choose 4, the frames will be upscaled twice (slower than upscaling by 2 with the binary compiled by yourself).
         For the chunk time I sugest using a maximum of 60 seconds, the script will use ffmpeg to split the original video in chunks of 60 seconds each.
-        The model is optional, leaving it blanck will default to models-cunet, if you want to specify a different model you will need to write its name, the script will know where to look for it.
-        Added an option to use cpu instead of gpu, the you just need to specify cpu at the end of the python call, if no cpu argument specified, the script will default to gpu. Using cpu is painfully slow, only advised if using gpu leads to glitches in the output or blank images.
+        The model is optional, leaving it blank will default to models-cunet, if you want to specify a different model you will need to write its name, the script will know where to look for it.
+        Added an option to use cpu instead of gpu, the you just need to specify cpu at the end of the python call, if no cpu argument specified, the script will default to gpu. Using cpu is painfully slow, only advised if using gpu leads to glitches in the output or black images.
 
       python video_upscaler.py resume
         As upscaling big videos can be so slow and the process may even stop, I have added this option.
