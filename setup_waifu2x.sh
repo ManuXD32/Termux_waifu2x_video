@@ -30,7 +30,7 @@ echo "Removing old upscale2x binary..."
 rm -f ~/../usr/bin/upscale2x
 
 echo "Copying new binary to bin folder..."
-cp ~/waifu2x-ncnn-vulkan/build/waifu2x-ncnn-vulkan ~/../usr/bin/upscale2x
+cp ~/waifu2x-ncnn-vulkan/build/waifu2x-ncnn-vulkan ~/../usr/bin/upscaler2x
 
 echo "Copying models"
 rm -rf ~/.upscaler_models/
